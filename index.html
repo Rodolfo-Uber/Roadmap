@@ -145,7 +145,12 @@ var DATA = {
         {
           id:"mvg-gemini", name:"Gemini Enterprise",
           items: [
-            { id:"gemini-enterprise", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+            { id:"gemini-enterprise", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"ABR", overview:"",
+              featuresInScope:[
+                { name:"NotebookLLM", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            }
           ]
         },
         {
