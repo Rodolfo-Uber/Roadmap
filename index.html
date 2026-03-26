@@ -56,7 +56,12 @@ var DATA = {
         {
           id:"ia360", name:"IA 360",
           items: [
-            { id:"ia360-v1", name:"V1", status:"in_progress", startMonth:"FEV", startOffset:0.5, endMonth:"ABR", endOffset:0.5, overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"ia360-v1", name:"V1", status:"in_progress", startMonth:"FEV", startOffset:0.5, endMonth:"ABR", endOffset:0.5, overview:"",
+              featuresInScope:[
+                { name:"RAG - Dados 360", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            },
             { id:"ia360-v2", name:"V2", status:"waiting", startMonth:"ABR", startOffset:0.5, endMonth:"MAI", overview:"",
               featuresInScope:[
                 { name:"Clusterização", testDev:false, testPO:false, testStakeholder:false },
@@ -64,8 +69,6 @@ var DATA = {
               ],
               featuresOutOfScope:[]
             },
-            { id:"rag-dados360",        name:"RAG - Dados 360",                   status:"waiting",     startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"agente-gestor-loja",  name:"Agente p/ gestor de loja",          status:"waiting",     startMonth:"MAI", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] },
             { id:"monitor-disponibilidade", name:"Monitor de disponibilidade de produtos", status:"idea", startMonth:"JUL", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
           ]
         },
