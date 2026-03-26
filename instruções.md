@@ -80,6 +80,7 @@ var DATA = {
 4. Não remova campos — se não souber o valor, deixe `""` ou `[]`.
 5. Ao adicionar um novo item, gere um `id` em kebab-case baseado no nome.
 6. O campo `endOffset` (0.0–1.0, opcional) controla o quanto o item preenche o último mês. Padrão é 1.0 (mês completo). Use 0.5 para "metade do mês".
+7. O campo `startOffset` (0.0–1.0, opcional) controla a partir de onde dentro do `startMonth` o item começa. Padrão é 0.0 (início do mês). Use 0.5 para "metade do mês".
 
 ---
 
