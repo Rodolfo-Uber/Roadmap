@@ -257,15 +257,24 @@ var DATA = {
   .bu{flex:1;background:#fff;border-radius:4px;padding:2px 8px;font-size:11px;color:#999;border:1px solid #ddd}
   #mf{flex:1;border:none;width:100%;background:#fff}
   /* flowchart */
-  .fb2{flex-shrink:0;padding:10px 16px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:8px;background:#fafafa}
   #fi{width:100%;border:1px solid #ddd;border-radius:4px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;color:#333;transition:border-color .15s;background:#fff}
   #fi:focus{border-color:#4A7EC8}
   #fr{display:flex;align-items:center;flex-wrap:wrap;gap:0;min-height:32px}
   .fs{background:#fff;border:1.5px solid #4A7EC8;border-radius:5px;padding:4px 12px;font-size:12px;font-weight:600;color:#1a3a6e;white-space:nowrap;box-shadow:0 1px 3px rgba(74,126,200,.15)}
   .fa{font-size:18px;color:#aaa;padding:0 4px;flex-shrink:0}
+  /* accordion */
+  .acc-head{display:flex;align-items:center;justify-content:space-between;padding:6px 12px;background:#f0f0f0;border-top:1px solid #e0e0e0;cursor:pointer;user-select:none;flex-shrink:0}
+  .acc-head:hover{background:#e8e8e8}
+  .acc-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888}
+  .acc-arrow{font-size:10px;color:#aaa;transition:transform .2s}
+  .acc-section.closed .acc-arrow{transform:rotate(-90deg)}
+  .acc-section.closed .acc-body-flow,.acc-section.closed .acc-body-prev{display:none}
+  .acc-body-flow{padding:8px 12px 10px;background:#fafafa;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+  .acc-body-prev{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#eee;min-height:0}
+  #acc-prev{flex:1;display:flex;flex-direction:column;min-height:0}
   /* expanded */
   .fm.expanded .hf-wrap{display:none}
-  .fm.expanded .fb2{display:none}
+  .fm.expanded #acc-flow{display:none}
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════════
@@ -299,20 +308,27 @@ var DATA = {
         <div class="hf-lbl">HTML</div>
         <textarea id="mc" placeholder="Cole aqui o HTML do mockup..."></textarea>
       </div>
-      <div class="prev-wrap">
-        <div class="prev-bar">
-          <span class="prev-lbl">🖥 Preview</span>
-          <button class="exp-btn" id="exp-btn" onclick="toggleExp()">⛶ Expandir</button>
+      <div class="acc-section" id="acc-flow">
+        <div class="acc-head" onclick="toggleAcc('acc-flow')">
+          <span class="acc-lbl">→ Fluxo</span>
+          <span class="acc-arrow">▲</span>
         </div>
-        <div class="bc">
-          <div class="bb"><div class="bd"><span></span><span></span><span></span></div><div class="bu">preview</div></div>
-          <iframe id="mf" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="acc-body-flow">
+          <input id="fi" placeholder="etapa 1 > mensagem de boas-vindas > usuário responde">
+          <div id="fr"></div>
         </div>
       </div>
-      <div class="fb2" id="fb2">
-        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#bbb">→ Fluxo</div>
-        <input id="fi" placeholder="etapa 1 > mensagem de boas-vindas > usuário responde">
-        <div id="fr"></div>
+      <div class="acc-section" id="acc-prev">
+        <div class="acc-head" onclick="toggleAcc('acc-prev')">
+          <span class="acc-lbl">🖥 Preview</span>
+          <button class="exp-btn" id="exp-btn" onclick="toggleExp(event)">⛶ Expandir</button>
+        </div>
+        <div class="acc-body-prev">
+          <div class="bc">
+            <div class="bb"><div class="bd"><span></span><span></span><span></span></div><div class="bu">preview</div></div>
+            <iframe id="mf" sandbox="allow-scripts allow-same-origin"></iframe>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -473,7 +489,9 @@ var DATA = {
     document.getElementById("exp-btn").textContent="⛶ Expandir";
     fk=null;
   }
-  function toggleExp(){
+  function toggleAcc(id){document.getElementById(id).classList.toggle("closed");}
+  function toggleExp(ev){
+    ev.stopPropagation();
     var fm=document.getElementById("fm"),btn=document.getElementById("exp-btn");
     if(fm.classList.contains("expanded")){fm.classList.remove("expanded");btn.textContent="⛶ Expandir";}
     else{fm.classList.add("expanded");btn.textContent="⊡ Recolher";}
