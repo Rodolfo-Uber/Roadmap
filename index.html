@@ -36,8 +36,8 @@ var DATA = {
         {
           id:"atena", name:"Atena",
           items: [
-            { id:"atena-v1", name:"Atena v1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"atena-v2", name:"Atena v2", status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"",
+            { id:"atena-v1", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"atena-v2", name:"V2", status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"",
               featuresInScope:[
                 { name:"Transporte interestadual", testDev:false, testPO:false, testStakeholder:false },
                 { name:"Integração Hi Chat", testDev:false, testPO:false, testStakeholder:false },
@@ -56,8 +56,14 @@ var DATA = {
         {
           id:"ia360", name:"IA 360",
           items: [
-            { id:"clusterizacao",       name:"Clusterização",                     status:"in_progress", startMonth:"FEV", endMonth:"FEV", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"ranking",             name:"Ranking",                           status:"in_progress", startMonth:"MAR", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"ia360-v1", name:"V1", status:"in_progress", startMonth:"FEV", startOffset:0.5, endMonth:"ABR", endOffset:0.5, overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"ia360-v2", name:"V2", status:"waiting", startMonth:"ABR", startOffset:0.5, endMonth:"MAI", overview:"",
+              featuresInScope:[
+                { name:"Clusterização", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Ranking", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            },
             { id:"rag-dados360",        name:"RAG - Dados 360",                   status:"waiting",     startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] },
             { id:"agente-gestor-loja",  name:"Agente p/ gestor de loja",          status:"waiting",     startMonth:"MAI", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] },
             { id:"monitor-disponibilidade", name:"Monitor de disponibilidade de produtos", status:"idea", startMonth:"JUL", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
@@ -384,8 +390,8 @@ var DATA = {
         h+='<div class="row pr"><div class="pn">'+pr.name+'</div><div class="tl" style="height:'+tlH+'px">';
         for(var ml=1;ml<12;ml++) h+='<div class="ml" style="left:'+(ml/12*100).toFixed(1)+'%"></div>';
         for(var li=0;li<lo.pl.length;li++){
-          var p=lo.pl[li],off=p.it.endOffset!==undefined?p.it.endOffset:1;
-          var l=(p.s/12*100).toFixed(2),w=((p.e-p.s+off)/12*100).toFixed(2),top=P+p.t*H+2;
+          var p=lo.pl[li],soff=p.it.startOffset!==undefined?p.it.startOffset:0,off=p.it.endOffset!==undefined?p.it.endOffset:1;
+          var l=((p.s+soff)/12*100).toFixed(2),w=((p.e-p.s+off-soff)/12*100).toFixed(2),top=P+p.t*H+2;
           h+='<div class="it s-'+p.it.status+'" style="left:'+l+'%;width:calc('+w+'% - 3px);top:'+top+'px"';
           h+=' onclick="openI(\''+cat.id+'\',\''+pr.id+'\',\''+p.it.id+'\')">';
           h+='<span>'+(IC[p.it.status]||'')+'</span><span style="overflow:hidden;text-overflow:ellipsis">'+p.it.name+'</span></div>';
