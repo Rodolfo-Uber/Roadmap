@@ -36,7 +36,25 @@ var DATA = {
         {
           id:"atena", name:"Atena",
           items: [
-            { id:"atena-v1", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"atena-v1", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"",
+              featuresInScope:[
+                { name:"Buscar produtos, preços, gerenciar carrinho, checkout (entrega motoboy ou retirada), PIX/cartão", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Identificar cliente por CPF, memorizar preferências e endereço", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Detectar e notificar sobre controlados (igual site/app)", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Transbordo para SAC quando: cliente cita sintoma ou pede atendimento humano", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Interface para assumir chat de transbordo", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[
+                "Rastrear/cancelar/trocar pedidos",
+                "Histórico",
+                "Cupons",
+                "Parcelamento",
+                "Estoque",
+                "Entrega por transportadora (interestadual)",
+                "Repassar atendimento humano para outro atendente",
+                "Coordenador acompanhar todos os atendimentos"
+              ]
+            },
             { id:"atena-v2", name:"V2", status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"",
               featuresInScope:[
                 { name:"Transporte interestadual", testDev:false, testPO:false, testStakeholder:false },
@@ -56,7 +74,12 @@ var DATA = {
         {
           id:"ia360", name:"IA 360",
           items: [
-            { id:"ia360-v1", name:"V1", status:"in_progress", startMonth:"FEV", startOffset:0.5, endMonth:"ABR", endOffset:0.5, overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"ia360-v1", name:"V1", status:"in_progress", startMonth:"FEV", startOffset:0.5, endMonth:"ABR", endOffset:0.5, overview:"",
+              featuresInScope:[
+                { name:"RAG - Dados 360", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            },
             { id:"ia360-v2", name:"V2", status:"waiting", startMonth:"ABR", startOffset:0.5, endMonth:"MAI", overview:"",
               featuresInScope:[
                 { name:"Clusterização", testDev:false, testPO:false, testStakeholder:false },
@@ -64,8 +87,6 @@ var DATA = {
               ],
               featuresOutOfScope:[]
             },
-            { id:"rag-dados360",        name:"RAG - Dados 360",                   status:"waiting",     startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"agente-gestor-loja",  name:"Agente p/ gestor de loja",          status:"waiting",     startMonth:"MAI", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] },
             { id:"monitor-disponibilidade", name:"Monitor de disponibilidade de produtos", status:"idea", startMonth:"JUL", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
           ]
         },
