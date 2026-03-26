@@ -104,9 +104,9 @@ var DATA = {
           ]
         },
         {
-          id:"ia-ged", name:"IA GED",
+          id:"ia-ged", name:"POPs",
           items: [
-            { id:"validador-pops",      name:"Validador de POPs",                 status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"",
+            { id:"validador-pops",      name:"V1",                 status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"",
               featuresInScope:[
                 { name:"Sugestões e Loop humano", testDev:false, testPO:false, testStakeholder:false }
               ],
@@ -120,10 +120,15 @@ var DATA = {
       id:"suporte", name:"Suporte", color:"#1A5E2A",
       products: [
         {
-          id:"ia-n1", name:"IA N1",
+          id:"triagem", name:"Triagem",
           items: [
-            { id:"triagem-chamados",            name:"Triagem de Chamados",               status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"suporte-sac-n1",              name:"Suporte SAC/SAF N1",               status:"waiting",     startMonth:"ABR", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+            { id:"triagem-chamados", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"ia-n1", name:"N1 SAC/SAF",
+          items: [
+            { id:"suporte-sac-n1", name:"V1", status:"waiting", startMonth:"ABR", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] }
           ]
         }
       ]
@@ -132,22 +137,22 @@ var DATA = {
       id:"hub", name:"HUB", color:"#0E6655",
       products: [
         {
-          id:"mvg", name:"MVG",
+          id:"mvg", name:"Monitor",
           items: [
-            { id:"monitor-custo-ia",      name:"Monitor de custo de IA",   status:"waiting", startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+            { id:"monitor-custo-ia",      name:"V1",   status:"waiting", startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] }
           ]
         },
         {
-          id:"mvg-gemini", name:"MVG",
+          id:"mvg-gemini", name:"Gemini Enterprise",
           items: [
-            { id:"gemini-enterprise", name:"Gemini Enterprise", status:"in_progress", startMonth:"FEV", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+            { id:"gemini-enterprise", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] }
           ]
         },
         {
-          id:"intranet", name:"Intranet",
+          id:"intranet", name:"Hermes",
           items: [
-            { id:"hermes-v1",          name:"Hermes v1",          status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
-            { id:"hermes-v2",          name:"Hermes v2",          status:"waiting", startMonth:"MAI", endMonth:"MAI", overview:"",
+            { id:"hermes-v1",          name:"V1",          status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"hermes-v2",          name:"V2",          status:"waiting", startMonth:"MAI", endMonth:"MAI", overview:"",
               featuresInScope:[
                 { name:"Hermes multimodelo", testDev:false, testPO:false, testStakeholder:false },
                 { name:"Agent builder", testDev:false, testPO:false, testStakeholder:false }
@@ -201,6 +206,7 @@ var DATA = {
   /* timeline */
   .tl{position:relative;width:100%}
   .ml{position:absolute;top:0;bottom:0;width:1px;background:#ebebeb;pointer-events:none;z-index:0}
+  .ql{position:absolute;top:0;bottom:0;width:0;border-left:1px dashed #f0f0f0;pointer-events:none;z-index:0}
   .it{position:absolute;height:26px;border-radius:3px;padding:0 7px;font-size:11px;font-weight:600;cursor:grab;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;z-index:1;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:filter .15s,transform .1s}
   .it:hover{filter:brightness(1.1);transform:translateY(-1px);z-index:10}
   .it.dragging{opacity:.35;transition:none}
@@ -381,10 +387,13 @@ var DATA = {
   function layout(items) {
     var tr=[],pl=[];
     for(var i=0;i<items.length;i++){
-      var it=items[i],s=MI[it.startMonth],e=MI[it.endMonth],t=-1;
+      var it=items[i];
+      var s=MI[it.startMonth]+(it.startOffset||0);
+      var e=MI[it.endMonth]+(it.endOffset!==undefined?it.endOffset:1);
+      var t=-1;
       for(var a=0;a<tr.length;a++){
         var ok=true;
-        for(var b=0;b<tr[a].length;b++){if(!(e<tr[a][b].s||s>tr[a][b].e)){ok=false;break;}}
+        for(var b=0;b<tr[a].length;b++){if(!(e<=tr[a][b].s||s>=tr[a][b].e)){ok=false;break;}}
         if(ok){t=a;break;}
       }
       if(t<0){t=tr.length;tr.push([]);}
@@ -412,10 +421,11 @@ var DATA = {
         for(var ii=0;ii<pr.items.length;ii++) if(pr.items[ii].status!=="idea") vis.push(pr.items[ii]);
         var lo=layout(vis),tlH=lo.rows>0?lo.rows*H+P*2:H+P;
         h+='<div class="row pr"><div class="pn">'+pr.name+'</div><div class="tl" data-cat="'+cat.id+'" data-prod="'+pr.id+'" style="height:'+tlH+'px">';
+        for(var qm=0;qm<12;qm++) for(var q=1;q<=3;q++) h+='<div class="ql" style="left:'+((qm+q*0.25)/12*100).toFixed(2)+'%"></div>';
         for(var ml=1;ml<12;ml++) h+='<div class="ml" style="left:'+(ml/12*100).toFixed(1)+'%"></div>';
         for(var li=0;li<lo.pl.length;li++){
-          var p=lo.pl[li],soff=p.it.startOffset!==undefined?p.it.startOffset:0,off=p.it.endOffset!==undefined?p.it.endOffset:1;
-          var l=((p.s+soff)/12*100).toFixed(2),w=((p.e-p.s+off-soff)/12*100).toFixed(2),top=P+p.t*H+2;
+          var p=lo.pl[li];
+          var l=(p.s/12*100).toFixed(2),w=((p.e-p.s)/12*100).toFixed(2),top=P+p.t*H+2;
           h+='<div class="it s-'+p.it.status+'" data-cat="'+cat.id+'" data-prod="'+pr.id+'" data-item="'+p.it.id+'"';
           h+=' style="left:'+l+'%;width:calc('+w+'% - 3px);top:'+top+'px">';
           h+='<span>'+(IC[p.it.status]||'')+'</span><span style="overflow:hidden;text-overflow:ellipsis">'+p.it.name+'</span>';
@@ -569,7 +579,7 @@ var DATA = {
 
   // ── Drag / Resize / Delete ───────────────────────────────────────────
   var drag=null;
-  function snap(f){return Math.round(f*2)/2;}
+  function snap(f){return Math.round(f*4)/4;}
   function fracFromX(cx,rect){return Math.max(0,Math.min(12,(cx-rect.left)/rect.width*12));}
   function startMF(frac){
     var idx=Math.min(11,Math.max(0,Math.floor(frac)));
