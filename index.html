@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Roadmap - IA & Dados</title>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     DADOS DO ROADMAP
+     Para atualizar: edite o objeto abaixo e salve o arquivo.
+════════════════════════════════════════════════════════════════ -->
+<script>
+var DATA = {
+  meta: {
+    title: "Roadmap - IA & Dados",
+    subtitle: "Este roadmap é temático e orientado a objetivos, não a features específicas | As datas são estimativas e podem ser ajustadas conforme aprendizado | As iniciativas listadas são as apostas para mover cada métrica | Indicadores serão acompanhados quinzenalmente para validar progresso | Novo produto em transição não está incluído neste roadmap de Q1"
+  },
+  months: ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"],
+  quarters: [
+    { name:"Q1", months:["JAN","FEV","MAR"] },
+    { name:"Q2", months:["ABR","MAI","JUN"] },
+    { name:"Q3", months:["JUL","AGO","SET","OUT"] },
+    { name:"Q4", months:["NOV","DEZ"] }
+  ],
+  categories: [
+    {
+      id:"vendas", name:"Vendas", color:"#5B2C6F",
+      products: [
+        {
+          id:"ucp", name:"UCP",
+          items: [
+            { id:"acp-ucp", name:"ACP / UCP", status:"idea", startMonth:"JUL", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"atena", name:"Atena",
+          items: [
+            { id:"atena-v1", name:"Atena v1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"atena-v2", name:"Atena v2", status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"",
+              featuresInScope:[
+                { name:"Transporte interestadual", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Integração Hi Chat", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            },
+            { id:"recuperacao-pix", name:"Recuperação de Pix não pago", status:"idea", startMonth:"AGO", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        }
+      ]
+    },
+    {
+      id:"eficiencia", name:"Eficiência operacional", color:"#784212",
+      products: [
+        {
+          id:"ia360", name:"IA 360",
+          items: [
+            { id:"clusterizacao",       name:"Clusterização",                     status:"in_progress", startMonth:"FEV", endMonth:"FEV", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"ranking",             name:"Ranking",                           status:"in_progress", startMonth:"MAR", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"rag-dados360",        name:"RAG - Dados 360",                   status:"waiting",     startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"agente-gestor-loja",  name:"Agente p/ gestor de loja",          status:"waiting",     startMonth:"MAI", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"monitor-disponibilidade", name:"Monitor de disponibilidade de produtos", status:"idea", startMonth:"JUL", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"apolo", name:"Apolo",
+          items: [
+            { id:"apolo-launch", name:"Apolo", status:"done", startMonth:"FEV", endMonth:"FEV", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"apolo-v2", name:"Apolo v2", status:"waiting", startMonth:"ABR", endMonth:"ABR", endOffset:0.5, overview:"",
+              featuresInScope:[
+                { name:"Conversa Individual", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            },
+            { id:"revisor-contratos", name:"Revisor de contratos", status:"idea", startMonth:"AGO", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"ia-ged", name:"IA GED",
+          items: [
+            { id:"validador-pops",      name:"Validador de POPs",                 status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"cadastro-higienizado",name:"Cadastro higienizado de produtos",  status:"idea",        startMonth:"AGO", endMonth:"AGO", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        }
+      ]
+    },
+    {
+      id:"suporte", name:"Suporte", color:"#1A5E2A",
+      products: [
+        {
+          id:"ia-n1", name:"IA N1",
+          items: [
+            { id:"analise-ferramentas-mercado", name:"Análise de Ferramentas de Mercado", status:"done",        startMonth:"JAN", endMonth:"FEV", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"triagem-chamados",            name:"Triagem de Chamados",               status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"suporte-sac-n1",              name:"Suporte SAC/SAF N1",               status:"waiting",     startMonth:"ABR", endMonth:"JUN", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        }
+      ]
+    },
+    {
+      id:"hub", name:"HUB", color:"#0E6655",
+      products: [
+        {
+          id:"mvg", name:"MVG",
+          items: [
+            { id:"definicao-ferramentas", name:"Definição de ferramentas", status:"done", startMonth:"JAN", endMonth:"JAN", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"imersao-google",        name:"Imersão Google",           status:"done", startMonth:"JAN", endMonth:"FEV", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"pesquisa-interna",      name:"Pesquisa interna",         status:"done", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"monitor-custo-ia",      name:"Monitor de custo de IA",   status:"waiting", startMonth:"ABR", endMonth:"MAI", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"mvg-gemini", name:"MVG",
+          items: [
+            { id:"gemini-enterprise", name:"Gemini Enterprise", status:"in_progress", startMonth:"FEV", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] }
+          ]
+        },
+        {
+          id:"intranet", name:"Intranet",
+          items: [
+            { id:"escopo-features",    name:"Escopo & Features",  status:"done",    startMonth:"MAR", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"hermes-v1",          name:"Hermes v1",          status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"hermes-v2",          name:"Hermes v2",          status:"waiting", startMonth:"MAI", endMonth:"MAI", overview:"",
+              featuresInScope:[
+                { name:"Hermes multimodelo", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Agent builder", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+</script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     ESTILOS
+════════════════════════════════════════════════════════════════ -->
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Calibri,Arial,sans-serif;font-size:13px;background:#e8e8e8;color:#1a1a1a;height:100vh;overflow:hidden}
+  .app{display:flex;height:100vh;overflow:hidden}
+
+  /* roadmap */
+  .rm-wrap{flex:1;overflow:auto;min-width:0}
+  .page{background:white;min-width:1050px}
+  .ph{padding:10px 16px 6px;border-bottom:1px solid #ddd}
+  .ph-title{font-size:15px;font-weight:700;margin-bottom:3px}
+  .ph-sub{font-size:10px;color:#888;line-height:1.5}
+
+  .row{display:grid;grid-template-columns:110px 1fr}
+
+  /* quarter header */
+  .qh{border-bottom:1px solid #444}
+  .qh .lc{background:#1e1e2e;color:#fff;font-weight:700;font-size:11px;display:flex;align-items:center;padding:4px 8px;border-right:1px solid #444}
+  .qa{display:grid;grid-template-columns:3fr 3fr 4fr 2fr}
+  .qc{text-align:center;padding:4px 8px;font-weight:700;font-size:12px;background:#1e1e2e;color:#fff;border-right:1px solid #444}
+
+  /* month header */
+  .mh{border-bottom:2px solid #333}
+  .mh .lc{background:#2c2c2c;color:#fff;font-weight:700;font-size:11px;padding:4px 8px;border-right:1px solid #555;display:flex;align-items:center}
+  .ma{display:grid;grid-template-columns:repeat(12,1fr)}
+  .mc{text-align:center;padding:5px 2px;font-weight:700;font-size:11px;background:#2c2c2c;color:#fff;border-right:1px solid #444}
+
+  /* category */
+  .cat-lbl{grid-column:1/-1;padding:5px 8px;font-weight:700;font-size:12px;color:#555;letter-spacing:.3px;background:#e8e8e8}
+
+  /* product */
+  .pr{border-bottom:1px solid #e8e8e8;align-items:stretch}
+  .pn{padding:0 8px;font-size:12px;font-weight:600;border-right:1px solid #ddd;display:flex;align-items:center;min-height:34px;color:#333;background:#fafafa}
+
+  /* timeline */
+  .tl{position:relative;width:100%}
+  .ml{position:absolute;top:0;bottom:0;width:1px;background:#ebebeb;pointer-events:none;z-index:0}
+  .it{position:absolute;height:26px;border-radius:3px;padding:0 7px;font-size:11px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden;z-index:1;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:filter .15s,transform .1s}
+  .it:hover{filter:brightness(1.1);transform:translateY(-1px);z-index:10}
+  .s-done{background:#5A8F6B;color:#fff}
+  .s-in_progress{background:#4A7EC8;color:#fff}
+  .s-waiting{background:#E8916A;color:#fff}
+
+  /* legend */
+  .legend{display:flex;gap:20px;padding:8px 16px;border-top:1px solid #e0e0e0;background:#f8f8f8}
+  .li{display:flex;align-items:center;gap:6px;font-size:11px;color:#555}
+  .ld{width:14px;height:14px;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+
+  /* aspirações */
+  .asp-wrap{background:white;min-width:1050px;padding:12px 16px 20px;border-top:2px solid #e0d5f0}
+  .asp-head{font-size:12px;font-weight:700;color:#6A1B9A;margin-bottom:10px;display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.4px}
+  .asp-cat{margin-bottom:10px}
+  .asp-cn{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#aaa;margin-bottom:6px}
+  .asp-items{display:flex;flex-wrap:wrap;gap:7px}
+  .asp-it{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;background:#7D3C98;color:#fff;border-radius:3px;font-size:11px;font-weight:600;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:filter .15s,transform .1s;white-space:nowrap}
+  .asp-it:hover{filter:brightness(1.15);transform:translateY(-1px)}
+
+  /* item modal */
+  .ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;align-items:center;justify-content:center}
+  .ov.open{display:flex}
+  .mo{background:#fff;border-radius:8px;width:90%;max-width:620px;max-height:85vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+  .mo-head{padding:18px 20px 12px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .mo-title{font-size:17px;font-weight:700;margin-bottom:4px}
+  .mo-bc{font-size:12px;color:#888}
+  .mo-x{background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1;padding:0 2px}
+  .mo-x:hover{color:#333}
+  .mo-body{padding:16px 20px 20px}
+  .ms{margin-bottom:18px}
+  .ms:last-child{margin-bottom:0}
+  .ms-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:#999;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid #f0f0f0}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600}
+  .b-done{background:#E8F5EC;color:#2E7D32}
+  .b-in_progress{background:#E3F0FB;color:#1565C0}
+  .b-waiting{background:#FFF3E8;color:#BF4A10}
+  .b-idea{background:#F5EDF9;color:#6A1B9A}
+  .ov-txt{font-size:13px;color:#444;line-height:1.6;white-space:pre-wrap}
+  .mt{font-size:12px;color:#bbb;font-style:italic}
+  .fl{list-style:none}
+  .fi{display:grid;grid-template-columns:1fr auto auto;align-items:center;padding:7px 0;border-bottom:1px solid #f5f5f5;gap:10px}
+  .fi:last-child{border-bottom:none}
+  .fn{font-size:13px;color:#333}
+  .fb{background:none;border:1px solid #ddd;border-radius:4px;padding:2px 7px;font-size:11px;color:#888;cursor:pointer;white-space:nowrap}
+  .fb:hover{background:#f0f0f0;color:#333}
+  .cks{display:flex;gap:12px}
+  .cl{display:flex;align-items:center;gap:4px;font-size:11px;color:#777;cursor:pointer;white-space:nowrap}
+  .cl input[type=checkbox]{cursor:pointer;accent-color:#4A7EC8;width:14px;height:14px}
+  .ool{list-style:none}
+  .ooi{padding:5px 0;font-size:13px;color:#888;display:flex;align-items:center;gap:8px}
+  .ooi::before{content:'—';color:#ccc;font-weight:700;flex-shrink:0}
+
+  /* feature modal */
+  .fov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;align-items:center;justify-content:center}
+  .fov.open{display:flex}
+  .fm{background:#fff;border-radius:8px;width:80vw;max-width:900px;height:88vh;display:flex;flex-direction:column;box-shadow:0 16px 50px rgba(0,0,0,.35);overflow:hidden}
+  .fm-head{padding:14px 18px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .fm-title{font-size:15px;font-weight:700;flex:1}
+  .fm-sub{font-size:12px;color:#999}
+  .fm-x{background:none;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1;padding:0 4px}
+  .fm-x:hover{color:#333}
+  .fm-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
+  /* html inline field */
+  .hf-wrap{flex-shrink:0;border-bottom:1px solid #eee;background:#fafafa}
+  .hf-lbl{padding:5px 12px 0;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#bbb}
+  #mc{width:100%;border:none;outline:none;resize:none;font-family:'Consolas','Courier New',monospace;font-size:12px;padding:5px 12px 8px;color:#555;line-height:1.5;background:#fafafa;height:58px}
+  /* preview */
+  .prev-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#eee}
+  .prev-bar{display:flex;align-items:center;justify-content:space-between;padding:5px 10px;background:#f0f0f0;border-bottom:1px solid #ddd;flex-shrink:0}
+  .prev-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#aaa}
+  .exp-btn{background:none;border:1px solid #ccc;border-radius:4px;padding:2px 8px;font-size:11px;color:#777;cursor:pointer;transition:background .1s}
+  .exp-btn:hover{background:#e8e8e8;color:#333}
+  .bc{flex:1;display:flex;flex-direction:column;margin:10px;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+  .bb{background:#e0e0e0;padding:6px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #ccc;flex-shrink:0}
+  .bd{display:flex;gap:5px}
+  .bd span{width:10px;height:10px;border-radius:50%;display:block}
+  .bd span:nth-child(1){background:#ff5f57}
+  .bd span:nth-child(2){background:#febc2e}
+  .bd span:nth-child(3){background:#28c840}
+  .bu{flex:1;background:#fff;border-radius:4px;padding:2px 8px;font-size:11px;color:#999;border:1px solid #ddd}
+  #mf{flex:1;border:none;width:100%;background:#fff}
+  /* flowchart */
+  .fb2{flex-shrink:0;padding:10px 16px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:8px;background:#fafafa}
+  #fi{width:100%;border:1px solid #ddd;border-radius:4px;padding:7px 10px;font-size:13px;outline:none;font-family:inherit;color:#333;transition:border-color .15s;background:#fff}
+  #fi:focus{border-color:#4A7EC8}
+  #fr{display:flex;align-items:center;flex-wrap:wrap;gap:0;min-height:32px}
+  .fs{background:#fff;border:1.5px solid #4A7EC8;border-radius:5px;padding:4px 12px;font-size:12px;font-weight:600;color:#1a3a6e;white-space:nowrap;box-shadow:0 1px 3px rgba(74,126,200,.15)}
+  .fa{font-size:18px;color:#aaa;padding:0 4px;flex-shrink:0}
+  /* expanded */
+  .fm.expanded .hf-wrap{display:none}
+  .fm.expanded .fb2{display:none}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HTML
+════════════════════════════════════════════════════════════════ -->
+<div class="app">
+  <div class="rm-wrap">
+    <div class="page" id="pg"></div>
+    <div class="asp-wrap" id="sb"></div>
+  </div>
+</div>
+
+<div class="ov" id="iov">
+  <div class="mo">
+    <div class="mo-head">
+      <div><div class="mo-title" id="mt"></div><div class="mo-bc" id="mbc"></div></div>
+      <button class="mo-x" onclick="closeI()">×</button>
+    </div>
+    <div class="mo-body" id="mb"></div>
+  </div>
+</div>
+
+<div class="fov" id="fov">
+  <div class="fm" id="fm">
+    <div class="fm-head">
+      <div><div class="fm-title" id="ft"></div><div class="fm-sub" id="fs"></div></div>
+      <button class="fm-x" onclick="closeF()">×</button>
+    </div>
+    <div class="fm-body">
+      <div class="hf-wrap" id="hf-wrap">
+        <div class="hf-lbl">HTML</div>
+        <textarea id="mc" placeholder="Cole aqui o HTML do mockup..."></textarea>
+      </div>
+      <div class="prev-wrap">
+        <div class="prev-bar">
+          <span class="prev-lbl">🖥 Preview</span>
+          <button class="exp-btn" id="exp-btn" onclick="toggleExp()">⛶ Expandir</button>
+        </div>
+        <div class="bc">
+          <div class="bb"><div class="bd"><span></span><span></span><span></span></div><div class="bu">preview</div></div>
+          <iframe id="mf" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+      </div>
+      <div class="fb2" id="fb2">
+        <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#bbb">→ Fluxo</div>
+        <input id="fi" placeholder="etapa 1 > mensagem de boas-vindas > usuário responde">
+        <div id="fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     LÓGICA
+════════════════════════════════════════════════════════════════ -->
+<script>
+  var MI = {JAN:0,FEV:1,MAR:2,ABR:3,MAI:4,JUN:5,JUL:6,AGO:7,SET:8,OUT:9,NOV:10,DEZ:11};
+  var IC = {done:"✅",in_progress:"▶",waiting:"⏳",idea:"💡"};
+  var LB = {done:"Concluído",in_progress:"Em andamento",waiting:"Aguardando recurso",idea:"Aspiração / Ideia"};
+  var fk = null;
+
+  function layout(items) {
+    var tr=[],pl=[];
+    for(var i=0;i<items.length;i++){
+      var it=items[i],s=MI[it.startMonth],e=MI[it.endMonth],t=-1;
+      for(var a=0;a<tr.length;a++){
+        var ok=true;
+        for(var b=0;b<tr[a].length;b++){if(!(e<tr[a][b].s||s>tr[a][b].e)){ok=false;break;}}
+        if(ok){t=a;break;}
+      }
+      if(t<0){t=tr.length;tr.push([]);}
+      tr[t].push({s:s,e:e});
+      pl.push({it:it,t:t,s:s,e:e});
+    }
+    return{pl:pl,rows:tr.length};
+  }
+
+  function renderPage(){
+    var H=30,P=4,h="";
+    h+='<div class="ph"><div class="ph-title">'+DATA.meta.title+'</div><div class="ph-sub">'+DATA.meta.subtitle+'</div></div>';
+    h+='<div class="row qh"><div class="lc">Produto</div><div class="qa">';
+    for(var q=0;q<DATA.quarters.length;q++) h+='<div class="qc">'+DATA.quarters[q].name+'</div>';
+    h+='</div></div>';
+    h+='<div class="row mh"><div class="lc"></div><div class="ma">';
+    for(var m=0;m<DATA.months.length;m++) h+='<div class="mc">'+DATA.months[m]+'</div>';
+    h+='</div></div>';
+
+    for(var ci=0;ci<DATA.categories.length;ci++){
+      var cat=DATA.categories[ci];
+      h+='<div class="row"><div class="cat-lbl">'+cat.name+'</div></div>';
+      for(var pi=0;pi<cat.products.length;pi++){
+        var pr=cat.products[pi],vis=[];
+        for(var ii=0;ii<pr.items.length;ii++) if(pr.items[ii].status!=="idea") vis.push(pr.items[ii]);
+        var lo=layout(vis),tlH=lo.rows>0?lo.rows*H+P*2:H+P;
+        h+='<div class="row pr"><div class="pn">'+pr.name+'</div><div class="tl" style="height:'+tlH+'px">';
+        for(var ml=1;ml<12;ml++) h+='<div class="ml" style="left:'+(ml/12*100).toFixed(1)+'%"></div>';
+        for(var li=0;li<lo.pl.length;li++){
+          var p=lo.pl[li],off=p.it.endOffset!==undefined?p.it.endOffset:1;
+          var l=(p.s/12*100).toFixed(2),w=((p.e-p.s+off)/12*100).toFixed(2),top=P+p.t*H+2;
+          h+='<div class="it s-'+p.it.status+'" style="left:'+l+'%;width:calc('+w+'% - 3px);top:'+top+'px"';
+          h+=' onclick="openI(\''+cat.id+'\',\''+pr.id+'\',\''+p.it.id+'\')">';
+          h+='<span>'+(IC[p.it.status]||'')+'</span><span style="overflow:hidden;text-overflow:ellipsis">'+p.it.name+'</span></div>';
+        }
+        h+='</div></div>';
+      }
+    }
+    h+='<div class="legend"><div class="li"><div class="ld" style="background:#5A8F6B"></div> Concluído</div>';
+    h+='<div class="li"><div class="ld" style="background:#4A7EC8"></div> Em andamento</div>';
+    h+='<div class="li"><div class="ld" style="background:#E8916A"></div> Aguardando recurso</div></div>';
+    document.getElementById("pg").innerHTML=h;
+  }
+
+  function renderSb(){
+    var cats=[],hasAny=false;
+    for(var ci=0;ci<DATA.categories.length;ci++){
+      var cat=DATA.categories[ci],items=[];
+      for(var pi=0;pi<cat.products.length;pi++){
+        var pr=cat.products[pi];
+        for(var ii=0;ii<pr.items.length;ii++){
+          if(pr.items[ii].status==="idea") items.push({it:pr.items[ii],cat:cat,pr:pr});
+        }
+      }
+      if(items.length){cats.push({cat:cat,items:items});hasAny=true;}
+    }
+    if(!hasAny){document.getElementById("sb").innerHTML="";return;}
+    var h='<div class="asp-head">💡 Aspirações</div>';
+    for(var ci2=0;ci2<cats.length;ci2++){
+      var g=cats[ci2];
+      h+='<div class="asp-cat"><div class="asp-cn">'+g.cat.name+'</div><div class="asp-items">';
+      for(var ij=0;ij<g.items.length;ij++){
+        var r=g.items[ij];
+        h+='<div class="asp-it" onclick="openI(\''+r.cat.id+'\',\''+r.pr.id+'\',\''+r.it.id+'\')">💡 '+r.it.name+'</div>';
+      }
+      h+='</div></div>';
+    }
+    document.getElementById("sb").innerHTML=h;
+  }
+
+  function findItem(catId,prodId,itemId){
+    for(var ci=0;ci<DATA.categories.length;ci++){
+      if(DATA.categories[ci].id!==catId) continue;
+      var cat=DATA.categories[ci];
+      for(var pi=0;pi<cat.products.length;pi++){
+        if(cat.products[pi].id!==prodId) continue;
+        var pr=cat.products[pi];
+        for(var ii=0;ii<pr.items.length;ii++){
+          if(pr.items[ii].id===itemId) return{cat:cat,pr:pr,item:pr.items[ii]};
+        }
+      }
+    }
+    return null;
+  }
+
+  function openI(catId,prodId,itemId){
+    var r=findItem(catId,prodId,itemId); if(!r) return;
+    var cat=r.cat,pr=r.pr,item=r.item;
+    document.getElementById("mt").textContent=item.name;
+    document.getElementById("mbc").textContent=cat.name+" › "+pr.name;
+    var b='<div class="ms"><div class="ms-t">Status</div>';
+    b+='<span class="badge b-'+item.status+'">'+(IC[item.status]||"")+' '+(LB[item.status]||item.status)+'</span></div>';
+    b+='<div class="ms"><div class="ms-t">Overview</div>';
+    b+=(item.overview&&item.overview.trim()?'<div class="ov-txt">'+e(item.overview)+'</div>':'<div class="mt">Sem descrição ainda.</div>')+'</div>';
+    b+='<div class="ms"><div class="ms-t">Features no escopo</div>';
+    if(item.featuresInScope&&item.featuresInScope.length){
+      b+='<ul class="fl">';
+      for(var fi=0;fi<item.featuresInScope.length;fi++){
+        var f=item.featuresInScope[fi],k=itemId+"__"+fi;
+        var dv=lc(k,"dev",f.testDev),po=lc(k,"po",f.testPO),st=lc(k,"st",f.testStakeholder);
+        b+='<li class="fi"><span class="fn">'+e(f.name)+'</span>';
+        b+='<button class="fb" onclick="openF(\''+itemId+'\','+fi+',\''+e(f.name)+'\',\''+e(item.name)+'\')">🔍 Detalhes</button>';
+        b+='<div class="cks">';
+        b+='<label class="cl"><input type="checkbox" '+(dv?"checked":"")+'  onchange="sc(\''+k+'\',\'dev\',this.checked)"> Dev</label>';
+        b+='<label class="cl"><input type="checkbox" '+(po?"checked":"")+'  onchange="sc(\''+k+'\',\'po\',this.checked)"> PO</label>';
+        b+='<label class="cl"><input type="checkbox" '+(st?"checked":"")+'  onchange="sc(\''+k+'\',\'st\',this.checked)"> Stakeholder</label>';
+        b+='</div></li>';
+      }
+      b+='</ul>';
+    } else b+='<div class="mt">Nenhuma feature definida ainda.</div>';
+    b+='</div><div class="ms"><div class="ms-t">Fora do escopo</div>';
+    if(item.featuresOutOfScope&&item.featuresOutOfScope.length){
+      b+='<ul class="ool">';
+      for(var oi=0;oi<item.featuresOutOfScope.length;oi++) b+='<li class="ooi">'+e(item.featuresOutOfScope[oi])+'</li>';
+      b+='</ul>';
+    } else b+='<div class="mt">Nenhum item fora do escopo.</div>';
+    b+='</div>';
+    document.getElementById("mb").innerHTML=b;
+    document.getElementById("iov").classList.add("open");
+  }
+
+  function closeI(){document.getElementById("iov").classList.remove("open");}
+  document.getElementById("iov").addEventListener("click",function(e){if(e.target.id==="iov")closeI();});
+
+  function openF(itemId,idx,featName,itemName){
+    fk="feat__"+itemId+"__"+idx;
+    document.getElementById("ft").textContent=featName;
+    document.getElementById("fs").textContent="Parte de: "+itemName;
+    var sh=localStorage.getItem(fk+"__html")||"",sf=localStorage.getItem(fk+"__flow")||"";
+    document.getElementById("mc").value=sh; upPrev(sh);
+    document.getElementById("fi").value=sf; rnFlow(sf);
+    document.getElementById("fov").classList.add("open");
+  }
+  function closeF(){
+    document.getElementById("fov").classList.remove("open");
+    document.getElementById("fm").classList.remove("expanded");
+    document.getElementById("exp-btn").textContent="⛶ Expandir";
+    fk=null;
+  }
+  function toggleExp(){
+    var fm=document.getElementById("fm"),btn=document.getElementById("exp-btn");
+    if(fm.classList.contains("expanded")){fm.classList.remove("expanded");btn.textContent="⛶ Expandir";}
+    else{fm.classList.add("expanded");btn.textContent="⊡ Recolher";}
+  }
+  document.getElementById("fov").addEventListener("click",function(e){if(e.target.id==="fov")closeF();});
+
+  var dt;
+  document.getElementById("mc").addEventListener("input",function(){
+    if(fk) localStorage.setItem(fk+"__html",this.value);
+    clearTimeout(dt);var v=this.value;
+    dt=setTimeout(function(){upPrev(v);},400);
+  });
+  document.getElementById("fi").addEventListener("input",function(){
+    if(fk) localStorage.setItem(fk+"__flow",this.value);
+    rnFlow(this.value);
+  });
+  function upPrev(html){
+    document.getElementById("mf").srcdoc=html||'<body style="display:flex;align-items:center;justify-content:center;height:100vh;color:#ccc;font-family:sans-serif;font-size:13px">Cole seu HTML no editor ←</body>';
+  }
+  function rnFlow(txt){
+    var el=document.getElementById("fr"),steps=txt.trim().split(">").map(function(s){return s.trim();}).filter(Boolean);
+    if(!steps.length){el.innerHTML="";return;}
+    var h="";
+    for(var i=0;i<steps.length;i++){
+      h+='<div class="fs">'+e(steps[i])+'</div>';
+      if(i<steps.length-1) h+='<div class="fa">›</div>';
+    }
+    el.innerHTML=h;
+  }
+
+  document.addEventListener("keydown",function(ev){
+    if(ev.key!=="Escape") return;
+    if(document.getElementById("fov").classList.contains("open")) closeF(); else closeI();
+  });
+
+  function lc(k,f,d){var v=localStorage.getItem("rm__"+k+"__"+f);return v!==null?v==="true":!!d;}
+  function sc(k,f,v){localStorage.setItem("rm__"+k+"__"+f,String(v));}
+  function e(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+  renderPage();
+  renderSb();
+</script>
+</body>
+</html>
