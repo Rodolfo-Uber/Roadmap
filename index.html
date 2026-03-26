@@ -36,7 +36,25 @@ var DATA = {
         {
           id:"atena", name:"Atena",
           items: [
-            { id:"atena-v1", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"", featuresInScope:[], featuresOutOfScope:[] },
+            { id:"atena-v1", name:"V1", status:"in_progress", startMonth:"FEV", endMonth:"MAR", overview:"",
+              featuresInScope:[
+                { name:"Buscar produtos, preços, gerenciar carrinho, checkout (entrega motoboy ou retirada), PIX/cartão", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Identificar cliente por CPF, memorizar preferências e endereço", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Detectar e notificar sobre controlados (igual site/app)", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Transbordo para SAC quando: cliente cita sintoma ou pede atendimento humano", testDev:false, testPO:false, testStakeholder:false },
+                { name:"Interface para assumir chat de transbordo", testDev:false, testPO:false, testStakeholder:false }
+              ],
+              featuresOutOfScope:[
+                "Rastrear/cancelar/trocar pedidos",
+                "Histórico",
+                "Cupons",
+                "Parcelamento",
+                "Estoque",
+                "Entrega por transportadora (interestadual)",
+                "Repassar atendimento humano para outro atendente",
+                "Coordenador acompanhar todos os atendimentos"
+              ]
+            },
             { id:"atena-v2", name:"V2", status:"waiting", startMonth:"ABR", endMonth:"ABR", overview:"",
               featuresInScope:[
                 { name:"Transporte interestadual", testDev:false, testPO:false, testStakeholder:false },
