@@ -250,6 +250,9 @@ var DATA = {
   .b-waiting{background:#FFF3E8;color:#BF4A10}
   .b-idea{background:#F5EDF9;color:#6A1B9A}
   .ov-txt{font-size:13px;color:#444;line-height:1.6;white-space:pre-wrap}
+  .ov-input{width:100%;border:none;outline:none;resize:none;font-family:inherit;font-size:13px;color:#444;line-height:1.6;background:transparent;padding:4px 0;min-height:52px;display:block}
+  .ov-input:focus{background:#f7f7f7;border-radius:4px;padding:4px 6px;margin-left:-6px;width:calc(100% + 6px)}
+  .ov-input::placeholder{color:#bbb;font-style:italic}
   .mt{font-size:12px;color:#bbb;font-style:italic}
   .fl{list-style:none}
   .fi{display:grid;grid-template-columns:1fr auto auto;align-items:center;padding:7px 0;border-bottom:1px solid #f5f5f5;gap:10px}
@@ -489,7 +492,7 @@ var DATA = {
     var b='<div class="ms"><div class="ms-t">Status</div>';
     b+='<span class="badge b-'+item.status+'">'+(IC[item.status]||"")+' '+(LB[item.status]||item.status)+'</span></div>';
     b+='<div class="ms"><div class="ms-t">Overview</div>';
-    b+=(item.overview&&item.overview.trim()?'<div class="ov-txt">'+e(item.overview)+'</div>':'<div class="mt">Sem descrição ainda.</div>')+'</div>';
+    b+='<textarea class="ov-input" id="ov-input" placeholder="Sem descrição ainda..." oninput="saveOv(this,\''+catId+'\',\''+prodId+'\',\''+itemId+'\')">'+e(item.overview||'')+'</textarea></div>';
     b+='<div class="ms"><div class="ms-t">Features no escopo</div>';
     if(item.featuresInScope&&item.featuresInScope.length){
       b+='<ul class="fl">';
@@ -514,6 +517,8 @@ var DATA = {
     } else b+='<div class="mt">Nenhum item fora do escopo.</div>';
     b+='</div>';
     document.getElementById("mb").innerHTML=b;
+    var ovi=document.getElementById("ov-input");
+    if(ovi){ovi.style.height="auto";ovi.style.height=Math.max(52,ovi.scrollHeight)+"px";}
     document.getElementById("iov").classList.add("open");
   }
 
@@ -573,6 +578,11 @@ var DATA = {
     if(document.getElementById("fov").classList.contains("open")) closeF(); else closeI();
   });
 
+  function saveOv(el,catId,prodId,itemId){
+    var r=findItem(catId,prodId,itemId);
+    if(r) r.item.overview=el.value;
+    el.style.height="auto";el.style.height=Math.max(52,el.scrollHeight)+"px";
+  }
   function lc(k,f,d){var v=localStorage.getItem("rm__"+k+"__"+f);return v!==null?v==="true":!!d;}
   function sc(k,f,v){localStorage.setItem("rm__"+k+"__"+f,String(v));}
   function e(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
