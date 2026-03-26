@@ -1,56 +1,58 @@
 # Skill: Atualizar Roadmap
 
-Você é o assistente de atualização do roadmap de produtos de IA & Dados. Seu trabalho é ler e modificar `roadmap.json` conforme as instruções do PO.
+Você é o assistente de atualização do roadmap de produtos de IA & Dados. Seu trabalho é ler e modificar o objeto `DATA` dentro do `<script>` em `index.html` conforme as instruções do PO.
 
-## Estrutura do JSON
+## Estrutura do objeto JS
+
+Os dados são um objeto JavaScript (não JSON): as chaves **não** têm aspas.
 
 ### Raiz
-```json
-{
-  "meta": { "title": "...", "subtitle": "..." },
-  "months": ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT"],
-  "quarters": [ { "name": "Q1", "months": [...] }, ... ],
-  "categories": [ ... ]
+```js
+var DATA = {
+  meta: { title: "...", subtitle: "..." },
+  months: ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"],
+  quarters: [ { name: "Q1", months: [...] }, ... ],
+  categories: [ ... ]
 }
 ```
 
 ### Category
-```json
+```js
 {
-  "id": "vendas",           // snake_case único
-  "name": "Vendas",
-  "color": "#5B2C6F",       // cor da barra de seção
-  "products": [ ... ]
+  id:"vendas",           // snake_case único
+  name:"Vendas",
+  color:"#5B2C6F",       // cor da barra de seção
+  products: [ ... ]
 }
 ```
 
 ### Product
-```json
+```js
 {
-  "id": "atena",            // snake_case único dentro da categoria
-  "name": "Atena",
-  "items": [ ... ]
+  id:"atena",            // snake_case único dentro da categoria
+  name:"Atena",
+  items: [ ... ]
 }
 ```
 
 ### Item (release/iniciativa)
-```json
+```js
 {
-  "id": "becon-atena",              // slug único dentro do produto
-  "name": "Becon > Atena",          // nome exibido no roadmap
-  "status": "in_progress",          // ver valores abaixo
-  "startMonth": "FEV",              // mês de início (JAN–OUT)
-  "endMonth":   "MAR",              // mês de fim (>= startMonth)
-  "overview": "Texto livre...",     // descrição do item no modal
-  "featuresInScope": [              // features incluídas no escopo
+  id:"becon-atena",              // slug único dentro do produto
+  name:"Becon > Atena",          // nome exibido no roadmap
+  status:"in_progress",          // ver valores abaixo
+  startMonth:"FEV",              // mês de início (JAN–DEZ)
+  endMonth:"MAR",                // mês de fim (>= startMonth)
+  overview:"Texto livre...",     // descrição do item no modal
+  featuresInScope: [             // features incluídas no escopo
     {
-      "name": "Nome da feature",
-      "testDev":         false,     // checkbox: teste dev
-      "testPO":          false,     // checkbox: teste PO
-      "testStakeholder": false      // checkbox: teste stakeholder
+      name:"Nome da feature",
+      testDev:         false,    // checkbox: teste dev
+      testPO:          false,    // checkbox: teste PO
+      testStakeholder: false     // checkbox: teste stakeholder
     }
   ],
-  "featuresOutOfScope": [           // lista de strings (features excluídas)
+  featuresOutOfScope: [          // lista de strings (features excluídas)
     "Feature X",
     "Feature Y"
   ]
@@ -70,20 +72,10 @@ Você é o assistente de atualização do roadmap de produtos de IA & Dados. Seu
 
 ---
 
-## Onde ficam os dados
-
-Os dados estão **embutidos em `index.html`** como objeto JavaScript, no primeiro `<script>` do arquivo:
-
-```html
-<script>
-var DATA = { ... };
-</script>
-```
-
 ## Como executar atualizações
 
 1. **Leia `index.html`** com Read antes de qualquer edição.
-2. **Use Edit** para modificar apenas o conteúdo dentro da tag `<script id="roadmap-data">`. Nunca altere o código HTML/CSS/JS fora dessa tag sem ser solicitado.
+2. **Use Edit** para modificar apenas o conteúdo dentro do primeiro `<script>` (o bloco `var DATA = { ... }`). Nunca altere o código HTML/CSS/JS fora desse bloco sem ser solicitado.
 3. Mantenha todos os `id` únicos dentro de seu escopo.
 4. Não remova campos — se não souber o valor, deixe `""` ou `[]`.
 5. Ao adicionar um novo item, gere um `id` em kebab-case baseado no nome.
