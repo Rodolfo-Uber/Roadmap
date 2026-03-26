@@ -269,10 +269,12 @@ var DATA = {
   .acc-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888}
   .acc-arrow{font-size:10px;color:#aaa;transition:transform .2s}
   .acc-section.closed .acc-arrow{transform:rotate(-90deg)}
-  .acc-section.closed .acc-body-flow,.acc-section.closed .acc-body-prev{display:none}
+  .acc-section.closed .acc-body-flow,.acc-section.closed .acc-body-prev,.acc-section.closed .acc-body-mockup{display:none}
   .acc-body-flow{padding:8px 12px 10px;background:#fafafa;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
   .acc-body-prev{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#eee;min-height:0}
-  #acc-prev{flex:1;display:flex;flex-direction:column;min-height:0}
+  .acc-body-mockup{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+  #acc-mockup{flex:1;display:flex;flex-direction:column;min-height:0}
+  #acc-mockup.closed{flex:0 0 auto}
   /* expanded */
   .fm.expanded .hf-wrap{display:none}
   .fm.expanded #acc-flow{display:none}
@@ -305,10 +307,6 @@ var DATA = {
       <button class="fm-x" onclick="closeF()">×</button>
     </div>
     <div class="fm-body">
-      <div class="hf-wrap" id="hf-wrap">
-        <div class="hf-lbl">HTML</div>
-        <textarea id="mc" placeholder="Cole aqui o HTML do mockup..."></textarea>
-      </div>
       <div class="acc-section" id="acc-flow">
         <div class="acc-head" onclick="toggleAcc('acc-flow')">
           <span class="acc-lbl">→ Fluxo</span>
@@ -319,15 +317,21 @@ var DATA = {
           <div id="fr"></div>
         </div>
       </div>
-      <div class="acc-section" id="acc-prev">
-        <div class="acc-head" onclick="toggleAcc('acc-prev')">
-          <span class="acc-lbl">🖥 Preview</span>
+      <div class="acc-section closed" id="acc-mockup">
+        <div class="acc-head" onclick="toggleAcc('acc-mockup')">
+          <span class="acc-lbl">🖥 Mockup</span>
           <button class="exp-btn" id="exp-btn" onclick="toggleExp(event)">⛶ Expandir</button>
         </div>
-        <div class="acc-body-prev">
-          <div class="bc">
-            <div class="bb"><div class="bd"><span></span><span></span><span></span></div><div class="bu">preview</div></div>
-            <iframe id="mf" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="acc-body-mockup">
+          <div class="hf-wrap" id="hf-wrap">
+            <div class="hf-lbl">HTML</div>
+            <textarea id="mc" placeholder="Cole aqui o HTML do mockup..."></textarea>
+          </div>
+          <div class="acc-body-prev">
+            <div class="bc">
+              <div class="bb"><div class="bd"><span></span><span></span><span></span></div><div class="bu">preview</div></div>
+              <iframe id="mf" sandbox="allow-scripts allow-same-origin"></iframe>
+            </div>
           </div>
         </div>
       </div>
